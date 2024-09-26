@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: SWAPI Serverless API
+  version: 1.0.0
+  description: API para interactuar con personajes de Star Wars
+
+paths:
+  /personaje/{id}:
+    get:
+      summary: Obtener un personaje por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Personaje encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Personaje'
+        '404':
+          description: Personaje no encontrado
+        '500':
+          description: Error interno del servidor
+
+  /personaje:
+    post:
+      summary: Crear un nuevo personaje
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Personaje'
+      responses:
+        '201':
+          description: Personaje creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Personaje'
+        '400':
+          description: Datos inválidos
+        '500':
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Personaje:
+      type: object
+      properties:
+        id:
+          type: string
+        nombre:
+          type: string
+        altura:
+          type: string
+        masa:
+          type: string
+        colorPelo:
+          type: string
+        colorPiel:
+          type: string
+        colorOjos:
+          type: string
+        anioNacimiento:
+          type: string
+        genero:
+          type: string
+        mundoNatal:
+          type: string
+        peliculas:
+          type: array
+          items:
+            type: string
+        especies:
+          type: array
+          items:
+            type: string
+        vehiculos:
+          type: array
+          items:
+            type: string
+        navesEstelares:
+          type: array
+          items:
+            type: string
+        creado:
+          type: string
+        editado:
+          type: string
+        url:
+          type: string
